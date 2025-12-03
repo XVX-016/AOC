@@ -1,0 +1,28 @@
+# Ignore compiled executables anywhere
+*.exe
+
+# Ignore object files
+*.o
+*.obj
+
+# Ignore temporary files / editor backups
+*~
+*.swp
+*.log
+
+# Ignore build folders (if any)
+build/
+out/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db
+
+# Ignore generated files in solutions
+solutions/*/*.exe
+solutions/*/*.o
+
+# Ignore generated files in utils
+utils/*/*.exe
+utils/*/*.o
+utils/*/*~
