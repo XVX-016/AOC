@@ -9,7 +9,6 @@ fn isInvalidID(n: u64) bool {
     if (len < 2) return false;
     var divisor: usize = 1;
     while (divisor <= len / 2) : (divisor += 1) {
-        // Check if divisor divides len evenly
         if (len % divisor != 0) continue;
         
         const repetitions = len / divisor;
