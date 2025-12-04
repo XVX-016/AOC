@@ -44,7 +44,7 @@ long long calculateTotalJoltage(const std::string& filename) {
             line.erase(line.length() - 1);
         }
         
-        // Skip empty lines
+        
         if (line.empty()) continue;
         std::string max12Digit = getMax12DigitNumber(line);
         long long joltage = 0;
