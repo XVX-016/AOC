@@ -1,38 +1,35 @@
-def count_timelines_dp():
+def count_timelines_optimized():
     with open('solutions\Day 07\input.txt', 'r') as f:
-        grid = [list(line.rstrip()) for line in f.readlines()]
+        grid = [line.rstrip() for line in f]
     
     rows = len(grid)
     cols = len(grid[0])
     
-    start_col = None
-    for c in range(cols):
-        if grid[0][c] == 'S':
-            start_col = c
-            grid[0][c] = '.' 
-            break
-    
-    if start_col is None:
-        raise ValueError("No starting position S found in first row")
-    dp = [[0] * cols for _ in range(rows + 1)]
-    dp[0][start_col] = 1
+    start_col = grid[0].find('S')
+    if start_col == -1:
+        raise ValueError("No S found")
+    grid[0] = grid[0].replace('S', '.')
+    prev = [0] * cols
+    prev[start_col] = 1
     
     for r in range(rows):
+        curr = [0] * cols
         for c in range(cols):
-            if dp[r][c] == 0:
+            if prev[c] == 0:
                 continue
             
             if grid[r][c] == '^':
-                if c - 1 >= 0:
-                    dp[r + 1][c - 1] += dp[r][c]
-                if c + 1 < cols:
-                    dp[r + 1][c + 1] += dp[r][c]
+                if c > 0:
+                    curr[c-1] += prev[c]
+                if c < cols - 1:
+                    curr[c+1] += prev[c]
             else:
-                dp[r + 1][c] += dp[r][c]
+                curr[c] += prev[c]
+        
+        prev = curr
     
-    total_timelines = sum(dp[rows])
-    return total_timelines
+    return sum(prev)
 
 if __name__ == "__main__":
-    result = count_timelines_dp()
+    result = count_timelines_optimized()
     print(f"Number of timelines: {result}")
